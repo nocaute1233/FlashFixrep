@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FlashFix.Desktop (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FlashFix.Desktop (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

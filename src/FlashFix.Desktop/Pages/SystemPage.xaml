@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="FlashFix_Desktop.Pages.SystemPage"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ScrollViewer Background="{StaticResource CanvasBrush}">
+  <StackPanel Padding="42,30,42,50" Spacing="24" MaxWidth="1240" HorizontalAlignment="Stretch">
+   <StackPanel x:Name="HeaderSection" Spacing="8">
+    <TextBlock Text="OTIMIZAÇÃO / SISTEMA" Style="{StaticResource EyebrowTextStyle}"/>
+    <TextBlock Text="Sistema" Style="{StaticResource DisplayTextStyle}"/>
+    <TextBlock Text="Conheça seu hardware antes de decidir o que mudar." Style="{StaticResource PageSubtitleStyle}"/>
+   </StackPanel>
+   <Border x:Name="HeroSection" Background="#ECECEA" CornerRadius="12" Padding="25" RequestedTheme="Light">
+    <Grid ColumnSpacing="24"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel Spacing="7"><TextBlock Text="ANÁLISE DO PC" Foreground="#69696C" FontSize="11" FontWeight="Bold" CharacterSpacing="80"/>
+      <TextBlock Text="Veja o que está instalado" Foreground="#161618" FontSize="22" FontWeight="SemiBold"/>
+      <TextBlock Text="O diagnóstico identifica os componentes e apresenta recomendações para este PC." Foreground="#66666A" FontSize="13" TextWrapping="Wrap"/></StackPanel>
+     <Button x:Name="AnalyzeButton" Grid.Column="1" Content="Analisar sistema" Click="Analyze_Click"
+      Background="#161618" Foreground="White" BorderThickness="0" Padding="18,11" VerticalAlignment="Center"/>
+    </Grid>
+   </Border>
+   <ProgressBar x:Name="AnalysisProgress" IsIndeterminate="True" Visibility="Collapsed" Height="3"/>
+   <TextBlock x:Name="StatusText" Text="Selecione Analisar sistema para começar." Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+   <TextBlock x:Name="SummaryText" Foreground="White" FontSize="18" FontWeight="SemiBold" TextWrapping="Wrap"/>
+   <StackPanel x:Name="AnalysisList" Spacing="9"/>
+  </StackPanel>
+ </ScrollViewer>
+</Page>

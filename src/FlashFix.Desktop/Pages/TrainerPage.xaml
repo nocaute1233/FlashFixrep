@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="FlashFix_Desktop.Pages.TrainerPage"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ScrollViewer Background="{StaticResource CanvasBrush}">
+  <StackPanel Padding="42,30,42,50" Spacing="20" MaxWidth="1240" HorizontalAlignment="Stretch">
+   <StackPanel x:Name="HeaderSection" Spacing="8">
+    <TextBlock Text="FERRAMENTAS / AIM TRAINER" Style="{StaticResource EyebrowTextStyle}"/>
+    <TextBlock Text="Aim Trainer" Style="{StaticResource DisplayTextStyle}"/>
+    <TextBlock Text="Treine dentro do FlashFix e acompanhe seus resultados." Style="{StaticResource PageSubtitleStyle}"/>
+   </StackPanel>
+   <Border x:Name="ControlSection" Style="{StaticResource PanelStyle}" Padding="20">
+    <Grid ColumnSpacing="13"><Grid.ColumnDefinitions><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel Spacing="6"><TextBlock Text="MODO" Style="{StaticResource EyebrowTextStyle}"/>
+      <ComboBox x:Name="ModeCombo" SelectedIndex="0" SelectionChanged="ModeChanged" HorizontalAlignment="Stretch">
+       <ComboBoxItem Content="Flick" Tag="Flick"/><ComboBoxItem Content="Tracking" Tag="Tracking"/>
+       <ComboBoxItem Content="Reflex Shot" Tag="ReflexShot"/><ComboBoxItem Content="Gridshot" Tag="Gridshot"/>
+      </ComboBox></StackPanel>
+     <StackPanel Grid.Column="1" Spacing="6"><TextBlock Text="DIFICULDADE" Style="{StaticResource EyebrowTextStyle}"/>
+      <ComboBox x:Name="DifficultyCombo" SelectedIndex="0" SelectionChanged="DifficultyChanged" HorizontalAlignment="Stretch">
+       <ComboBoxItem Content="Iniciante"/><ComboBoxItem Content="Intermediário"/><ComboBoxItem Content="Avançado"/>
+      </ComboBox></StackPanel>
+     <StackPanel Grid.Column="2" Spacing="6"><TextBlock Text="DURAÇÃO" Style="{StaticResource EyebrowTextStyle}"/>
+      <ComboBox x:Name="DurationCombo" SelectedIndex="0" HorizontalAlignment="Stretch">
+       <ComboBoxItem Content="30 s" Tag="30"/><ComboBoxItem Content="60 s" Tag="60"/><ComboBoxItem Content="90 s" Tag="90"/>
+      </ComboBox></StackPanel>
+     <StackPanel Grid.Column="3" Spacing="4"><TextBlock Text="TAMANHO DO ALVO" Style="{StaticResource EyebrowTextStyle}"/>
+      <Slider x:Name="SizeSlider" Minimum="20" Maximum="60" Value="40" StepFrequency="5"/></StackPanel>
+     <Button x:Name="StartButton" Grid.Column="4" Content="Iniciar treino" Click="Start_Click"
+      Background="#ECECEA" Foreground="#141416" BorderThickness="0" CornerRadius="9" Padding="18,11" VerticalAlignment="Bottom"/>
+    </Grid>
+   </Border>
+   <TextBlock x:Name="ModeDescription" Text="Clique no alvo assim que ele aparecer. Cada acerto muda sua posição."
+    Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+   <TextBlock x:Name="ActiveModeText" Visibility="Collapsed" Style="{StaticResource EyebrowTextStyle}"/>
+   <Border Background="#18181A" BorderBrush="#36363A" BorderThickness="1" CornerRadius="12" Padding="10">
+    <Canvas x:Name="ArenaCanvas" Width="740" Height="400" Background="#242428"
+     PointerPressed="Arena_PointerPressed" PointerMoved="Arena_PointerMoved"
+     PointerExited="Arena_PointerExited" HorizontalAlignment="Center"/>
+   </Border>
+   <ProgressBar x:Name="TimeProgress" Minimum="0" Maximum="30" Value="0" Height="4" Foreground="White"/>
+   <Grid ColumnSpacing="13"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <StackPanel Spacing="4"><TextBlock Text="TEMPO" Style="{StaticResource EyebrowTextStyle}"/><TextBlock x:Name="TimeText" Text="30 s" FontSize="24" Foreground="White"/></StackPanel>
+    <StackPanel Grid.Column="1" Spacing="4"><TextBlock Text="PONTOS" Style="{StaticResource EyebrowTextStyle}"/><TextBlock x:Name="ScoreText" Text="0" FontSize="24" Foreground="White"/></StackPanel>
+    <StackPanel Grid.Column="2" Spacing="4"><TextBlock Text="ACERTOS" Style="{StaticResource EyebrowTextStyle}"/><TextBlock x:Name="HitsText" Text="0" FontSize="24" Foreground="White"/></StackPanel>
+    <StackPanel Grid.Column="3" Spacing="4"><TextBlock Text="PRECISÃO" Style="{StaticResource EyebrowTextStyle}"/><TextBlock x:Name="AccuracyText" Text="—" FontSize="24" Foreground="White"/></StackPanel>
+    <Button x:Name="StopButton" Grid.Column="4" Content="Encerrar" Click="Stop_Click" IsEnabled="False"
+     Background="#29292C" Foreground="White" BorderThickness="0" CornerRadius="9" Padding="15,9" VerticalAlignment="Center"/>
+   </Grid>
+   <TextBlock x:Name="StatusText" Text="Escolha o modo e inicie uma sessão." Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+   <TextBlock x:Name="ResultsHeading" Text="SESSÕES RECENTES" Style="{StaticResource EyebrowTextStyle}" Margin="0,12,0,0"/>
+   <StackPanel x:Name="ResultsList" Spacing="8"/>
+  </StackPanel>
+ </ScrollViewer>
+</Page>

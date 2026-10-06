@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="FlashFix_Desktop.Pages.FeaturePage"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ScrollViewer Background="{StaticResource CanvasBrush}">
+  <StackPanel Padding="42,30,42,50" Spacing="26" MaxWidth="1240" HorizontalAlignment="Stretch">
+   <StackPanel x:Name="HeaderSection" Spacing="8">
+    <TextBlock x:Name="PhaseLabel" Style="{StaticResource EyebrowTextStyle}"/>
+    <TextBlock x:Name="PageTitle" Style="{StaticResource DisplayTextStyle}"/>
+    <TextBlock x:Name="PageSubtitle" Style="{StaticResource PageSubtitleStyle}"/>
+   </StackPanel>
+   <Border x:Name="ContentSection" Background="#ECECEA" CornerRadius="12" Padding="32" RequestedTheme="Light">
+    <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="RECURSO EM DESENVOLVIMENTO" Foreground="#68686B" FontSize="11" FontWeight="Bold" CharacterSpacing="80"/>
+      <FontIcon x:Name="FeatureIcon" Grid.Column="1" FontSize="26" Foreground="#1A1A1C"/>
+     </Grid>
+     <StackPanel Grid.Row="1" Spacing="13" Margin="0,65,0,70" MaxWidth="690" HorizontalAlignment="Left">
+      <TextBlock Text="Ainda não disponível" Foreground="#151517"
+       FontSize="38" FontWeight="SemiBold" LineHeight="44" TextWrapping="Wrap"/>
+      <TextBlock x:Name="PageDescription" Foreground="#5B5B60" FontSize="16" TextWrapping="Wrap"/>
+     </StackPanel>
+     <Grid Grid.Row="2"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="Nenhuma alteração é aplicada nesta seção." Foreground="#66666A" FontSize="12"/>
+      <TextBlock Grid.Column="1" Text="SEM AÇÕES NESTA PÁGINA" Foreground="#333336" FontSize="11" FontWeight="Bold"/>
+     </Grid>
+    </Grid>
+   </Border>
+  </StackPanel>
+ </ScrollViewer>
+</Page>

@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FlashFix.Api/FlashFix.Api.csproj" />
+    <Project Path="src/FlashFix.Client/FlashFix.Client.csproj" />
+    <Project Path="src/FlashFix.Core/FlashFix.Core.csproj" />
+    <Project Path="src/FlashFix.Desktop/FlashFix.Desktop.csproj" />
+    <Project Path="src/FlashFix.Hardware/FlashFix.Hardware.csproj" />
+    <Project Path="src/FlashFix.KeyManager/FlashFix.KeyManager.csproj" />
+    <Project Path="src/FlashFix.Optimization/FlashFix.Optimization.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FlashFix.Core.Tests/FlashFix.Core.Tests.csproj" />
+    <Project Path="tests/FlashFix.Optimization.Tests/FlashFix.Optimization.Tests.csproj" />
+  </Folder>
+</Solution>

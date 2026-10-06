@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="FlashFix_Desktop.Pages.SettingsPage"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ScrollViewer Background="{StaticResource CanvasBrush}">
+  <StackPanel Padding="42,30,42,50" Spacing="26" MaxWidth="1240" HorizontalAlignment="Stretch">
+   <StackPanel x:Name="HeaderSection" Spacing="8">
+    <TextBlock Text="SUA CONTA / PREFERÊNCIAS" Style="{StaticResource EyebrowTextStyle}"/>
+    <TextBlock Text="Configurações" Style="{StaticResource DisplayTextStyle}"/>
+    <TextBlock Text="Confira sua licença e ajuste a interface." Style="{StaticResource PageSubtitleStyle}"/>
+   </StackPanel>
+   <Grid x:Name="ContentSection" ColumnSpacing="13">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="1.5*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <Border Background="#ECECEA" CornerRadius="12" Padding="28" RequestedTheme="Light">
+     <StackPanel Spacing="20">
+      <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <TextBlock Text="PERFIL / FLASHFIX" Foreground="#66666A" FontSize="11" FontWeight="Bold" CharacterSpacing="75"/>
+       <TextBlock Grid.Column="1" Text="01" Foreground="#99999A" FontSize="11" FontWeight="Bold"/>
+      </Grid>
+      <StackPanel Orientation="Horizontal" Spacing="17" Margin="0,12,0,10">
+       <Image Width="62" Height="62" Source="ms-appx:///Assets/Square44x44Logo.scale-200.png"/>
+       <StackPanel VerticalAlignment="Center" Spacing="4">
+        <TextBlock x:Name="UsernameText" Text="Validando a conta…" Foreground="#151517" FontSize="24" FontWeight="SemiBold"/>
+        <TextBlock Text="Conta FlashFix" Foreground="#67676B" FontSize="13"/>
+       </StackPanel>
+      </StackPanel>
+      <Rectangle Height="1" Fill="#CDCDCB"/>
+      <StackPanel Spacing="6">
+       <TextBlock Text="LICENÇA" Foreground="#6A6A6D" FontSize="11" FontWeight="Bold"/>
+       <TextBlock x:Name="LicenseText" Text="Verificando a licença…" Foreground="#202023" FontSize="15" FontWeight="SemiBold"/>
+      </StackPanel>
+      <Button Content="Sair da conta" Click="LogoutButton_Click" HorizontalAlignment="Left"
+        Background="#171719" Foreground="White" BorderThickness="0" Padding="16,10" Margin="0,10,0,0"/>
+     </StackPanel>
+    </Border>
+    <Border Grid.Column="1" Style="{StaticResource PanelStyle}" Padding="27">
+     <StackPanel Spacing="20">
+      <TextBlock Text="INTERFACE / 02" Style="{StaticResource EyebrowTextStyle}"/>
+      <TextBlock Text="Preferências da interface" Foreground="White" FontSize="25" FontWeight="SemiBold"/>
+      <Rectangle Height="1" Fill="{StaticResource LineBrush}"/>
+      <StackPanel Spacing="5">
+       <TextBlock Text="Idioma" Foreground="White" FontSize="15" FontWeight="SemiBold"/>
+       <TextBlock Text="Português (Brasil)" Foreground="{StaticResource MutedTextBrush}" FontSize="13"/>
+      </StackPanel>
+      <Rectangle Height="1" Fill="{StaticResource LineBrush}"/>
+      <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <StackPanel Spacing="5"><TextBlock Text="Animações" Foreground="White" FontSize="15" FontWeight="SemiBold"/>
+        <TextBlock Text="Transições suaves entre as telas." Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/></StackPanel>
+       <ToggleSwitch x:Name="MotionToggle" Grid.Column="1" Toggled="MotionToggle_Toggled" OnContent="" OffContent="" VerticalAlignment="Center"/>
+      </Grid>
+      <Rectangle Height="1" Fill="{StaticResource LineBrush}"/>
+      <TextBlock Text="Outras preferências serão adicionadas conforme os recursos forem concluídos."
+        Foreground="{StaticResource SubtleTextBrush}" FontSize="12" TextWrapping="Wrap"/>
+     </StackPanel>
+    </Border>
+   </Grid>
+  </StackPanel>
+ </ScrollViewer>
+</Page>
