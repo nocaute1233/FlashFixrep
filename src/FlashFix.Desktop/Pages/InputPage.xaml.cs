@@ -203,6 +203,10 @@ public sealed partial class InputPage : Page
             ? $"Aceleração {(status.Current[2] == 0 ? "desativada" : "ativada")} · limites {status.Current[0]}/{status.Current[1]}"
             : "Indisponível",
         TweakKind.MouseSpeed => $"{status.Current[0]}/20",
+        TweakKind.MouseWheelLines => status.Current[0] == -1
+            ? "Uma página por etapa" : $"{status.Current[0]} linha(s) por etapa",
+        TweakKind.MouseWheelChars => status.Current[0] == -1
+            ? "Uma página por etapa" : $"{status.Current[0]} caractere(s) por etapa",
         TweakKind.KeyboardDelay => $"{status.Current[0]}/3 (0 = menor atraso)",
         TweakKind.KeyboardSpeed => $"{status.Current[0]}/31 (31 = mais rápida)",
         _ => "Indisponível"

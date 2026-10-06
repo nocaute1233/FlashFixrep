@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="FlashFix_Desktop.Pages.DisplayPage"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ScrollViewer Background="{StaticResource CanvasBrush}">
+  <StackPanel Padding="42,30,42,50" Spacing="23" MaxWidth="1240" HorizontalAlignment="Stretch">
+   <StackPanel x:Name="HeaderSection" Spacing="8">
+    <TextBlock Text="HARDWARE / TELA" Style="{StaticResource EyebrowTextStyle}"/>
+    <TextBlock Text="Display" Style="{StaticResource DisplayTextStyle}"/>
+    <TextBlock Text="Confira a configuração detectada antes de ajustar a tela no Windows."
+               Style="{StaticResource PageSubtitleStyle}"/>
+   </StackPanel>
+   <Border x:Name="DisplayCard" BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+           CornerRadius="20" Padding="30">
+    <Border.Background>
+     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Color="#29241E" Offset="0"/>
+      <GradientStop Color="#191817" Offset="1"/>
+     </LinearGradientBrush>
+    </Border.Background>
+    <StackPanel Spacing="13">
+     <TextBlock Text="CONFIGURAÇÃO ATUAL" Foreground="{StaticResource BrandBrush}"
+                FontSize="11" FontWeight="SemiBold" CharacterSpacing="90"/>
+     <TextBlock x:Name="DisplayValue" Text="Aguardando leitura" Foreground="{StaticResource PrimaryTextBrush}"
+                FontSize="30" FontWeight="SemiBold" TextWrapping="Wrap"/>
+     <TextBlock x:Name="GraphicsValue" Text="Placa de vídeo: aguardando leitura"
+                Foreground="{StaticResource MutedTextBrush}" FontSize="14" TextWrapping="Wrap"/>
+     <TextBlock x:Name="ReadStatus" Text="Clique em Atualizar dados para consultar o Windows."
+                Foreground="{StaticResource SubtleTextBrush}" FontSize="12" TextWrapping="Wrap"/>
+     <Button x:Name="RefreshButton" Content="Atualizar dados" Click="Refresh_Click"
+             HorizontalAlignment="Left" Background="{StaticResource BrandBrush}" Foreground="#201811"
+             BorderThickness="0" CornerRadius="11" Padding="18,10" Margin="0,5,0,0"/>
+    </StackPanel>
+   </Border>
+   <TextBlock Text="AJUSTES DO WINDOWS" Style="{StaticResource EyebrowTextStyle}"/>
+   <Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <Border Style="{StaticResource PanelStyle}" Padding="24">
+     <StackPanel Spacing="11">
+      <TextBlock Text="Resolução e escala" Foreground="{StaticResource PrimaryTextBrush}" FontSize="20" FontWeight="SemiBold"/>
+      <TextBlock Text="Use os valores recomendados pelo Windows e pelo fabricante do monitor."
+                 Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+      <Button Content="Abrir configurações de tela" Click="OpenDisplay_Click" HorizontalAlignment="Left"
+              Background="{StaticResource SurfaceRaisedBrush}" Foreground="{StaticResource PrimaryTextBrush}"
+              BorderThickness="0" CornerRadius="10" Padding="15,9"/>
+     </StackPanel>
+    </Border>
+    <Border Grid.Column="1" Style="{StaticResource PanelStyle}" Padding="24">
+     <StackPanel Spacing="11">
+      <TextBlock Text="Taxa de atualização" Foreground="{StaticResource PrimaryTextBrush}" FontSize="20" FontWeight="SemiBold"/>
+      <TextBlock Text="Consulte as frequências oferecidas pelo monitor; o FlashFix não altera o driver."
+                 Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+      <Button Content="Abrir opções avançadas" Click="OpenAdvanced_Click" HorizontalAlignment="Left"
+              Background="{StaticResource SurfaceRaisedBrush}" Foreground="{StaticResource PrimaryTextBrush}"
+              BorderThickness="0" CornerRadius="10" Padding="15,9"/>
+     </StackPanel>
+    </Border>
+   </Grid>
+  </StackPanel>
+ </ScrollViewer>
+</Page>

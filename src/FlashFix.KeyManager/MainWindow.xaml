@@ -25,12 +25,14 @@
  </Window.Resources>
  <Grid>
   <Grid x:Name="LoginView"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="465"/></Grid.ColumnDefinitions>
-   <Grid Background="#101012"><StackPanel Margin="58,48">
+   <Grid Background="#171410"><StackPanel Margin="58,48">
     <TextBlock Text="FLASHFIX" Foreground="White" FontSize="16" FontWeight="Bold"/>
     <TextBlock Text="GERENCIADOR DE CHAVES" Foreground="#99999D" FontWeight="Bold" Margin="0,165,0,20"/>
     <TextBlock Text="Licenças em&#10;um só lugar." Foreground="White" FontSize="58" FontWeight="SemiBold" LineHeight="65"/>
     <Rectangle Height="1" Fill="#444447" Margin="0,32,0,24"/>
     <TextBlock Text="Emita chaves, consulte contas e acompanhe o histórico de cada licença." Foreground="#AAAAAE" FontSize="17" TextWrapping="Wrap"/>
+    <Button Content="Suporte no Discord  ↗" Click="Support_Click" Margin="0,35,0,0"
+     HorizontalAlignment="Left" Background="#3C3024" Foreground="#EAC49A" BorderThickness="0"/>
    </StackPanel></Grid>
    <Grid Grid.Column="1" Margin="48"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
     <TextBlock Text="ACESSO ADMINISTRATIVO" Foreground="#77777B" FontSize="11" FontWeight="Bold"/>

@@ -45,6 +45,9 @@ public sealed partial class SettingsPage : Page
     private void MotionToggle_Toggled(object sender, RoutedEventArgs e) =>
         Motion.SetEnabled(MotionToggle.IsOn);
 
+    private async void Support_Click(object sender, RoutedEventArgs e) =>
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("https://discord.gg/flashfix"));
+
     private async void LogoutButton_Click(object sender, RoutedEventArgs e)
     {
         try { await ((App)Application.Current).LogoutAsync(); }

@@ -49,11 +49,26 @@
        <ToggleSwitch x:Name="MotionToggle" Grid.Column="1" Toggled="MotionToggle_Toggled" OnContent="" OffContent="" VerticalAlignment="Center"/>
       </Grid>
       <Rectangle Height="1" Fill="{StaticResource LineBrush}"/>
-      <TextBlock Text="Outras preferências serão adicionadas conforme os recursos forem concluídos."
+      <TextBlock Text="Você pode desativar as transições a qualquer momento."
         Foreground="{StaticResource SubtleTextBrush}" FontSize="12" TextWrapping="Wrap"/>
      </StackPanel>
     </Border>
    </Grid>
+   <Border Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}"
+           BorderThickness="1" CornerRadius="18" Padding="25">
+    <Grid ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel Spacing="7">
+      <TextBlock Text="SUPORTE" Style="{StaticResource EyebrowTextStyle}"/>
+      <TextBlock Text="Precisa falar com a equipe?" Foreground="{StaticResource PrimaryTextBrush}"
+                 FontSize="20" FontWeight="SemiBold"/>
+      <TextBlock Text="Acesse o servidor oficial para suporte e informações sobre o serviço."
+                 Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+     </StackPanel>
+     <Button Grid.Column="1" Content="Abrir Discord" Click="Support_Click"
+             Background="{StaticResource BrandBrush}" Foreground="#201811" BorderThickness="0"
+             CornerRadius="12" Padding="18,11" VerticalAlignment="Center"/>
+    </Grid>
+   </Border>
   </StackPanel>
  </ScrollViewer>
 </Page>

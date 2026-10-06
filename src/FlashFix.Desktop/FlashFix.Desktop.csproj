@@ -59,6 +59,19 @@
     <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
     <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
-    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">False</PublishTrimmed>
   </PropertyGroup>
+
+  <Target Name="CopyUnpackagedWinUiResources" AfterTargets="Publish" Condition="'$(WindowsPackageType)' == 'None'">
+    <ItemGroup>
+      <_WinUiRoot Include="$(TargetDir)App.xbf;$(TargetDir)MainWindow.xbf;$(TargetDir)FlashFix.Desktop.pri" />
+      <_WinUiDesign Include="$(TargetDir)Design\**\*.xbf" />
+      <_WinUiPages Include="$(TargetDir)Pages\**\*.xbf" />
+      <_WinUiAssets Include="$(TargetDir)Assets\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_WinUiRoot)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_WinUiDesign)" DestinationFiles="@(_WinUiDesign->'$(PublishDir)Design\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_WinUiPages)" DestinationFiles="@(_WinUiPages->'$(PublishDir)Pages\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_WinUiAssets)" DestinationFiles="@(_WinUiAssets->'$(PublishDir)Assets\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

@@ -27,6 +27,8 @@ public sealed class WindowsInputSettings : IInputSettings
         uint action = kind switch
         {
             TweakKind.MouseSpeed => 0x0070,
+            TweakKind.MouseWheelLines => 0x0068,
+            TweakKind.MouseWheelChars => 0x006C,
             TweakKind.KeyboardDelay => 0x0016,
             TweakKind.KeyboardSpeed => 0x000A,
             _ => throw new ArgumentOutOfRangeException(nameof(kind))
@@ -44,6 +46,10 @@ public sealed class WindowsInputSettings : IInputSettings
                 SystemParametersInfoArray(0x0004, 0, values, PersistAndBroadcast),
             TweakKind.MouseSpeed when values.Length == 1 && values[0] is >= 1 and <= 20 =>
                 SystemParametersInfoPointer(0x0071, 0, new IntPtr(values[0]), PersistAndBroadcast),
+            TweakKind.MouseWheelLines when values.Length == 1 && (values[0] >= 0 || values[0] == -1) =>
+                SystemParametersInfoPointer(0x0069, unchecked((uint)values[0]), IntPtr.Zero, PersistAndBroadcast),
+            TweakKind.MouseWheelChars when values.Length == 1 && (values[0] >= 0 || values[0] == -1) =>
+                SystemParametersInfoPointer(0x006D, unchecked((uint)values[0]), IntPtr.Zero, PersistAndBroadcast),
             TweakKind.KeyboardDelay when values.Length == 1 && values[0] is >= 0 and <= 3 =>
                 SystemParametersInfoPointer(0x0017, (uint)values[0], IntPtr.Zero, PersistAndBroadcast),
             TweakKind.KeyboardSpeed when values.Length == 1 && values[0] is >= 0 and <= 31 =>

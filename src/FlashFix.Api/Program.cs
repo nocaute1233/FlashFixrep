@@ -88,6 +88,7 @@ await using (var scope = app.Services.CreateAsyncScope())
         });
         await db.SaveChangesAsync();
     }
+    Environment.SetEnvironmentVariable("FLASHFIX_BOOTSTRAP_ADMIN_PASSWORD", null);
 }
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));

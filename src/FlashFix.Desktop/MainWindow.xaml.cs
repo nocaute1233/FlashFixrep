@@ -113,6 +113,8 @@ public sealed partial class MainWindow : Window
             NavFrame.Navigate(typeof(HistoryPage));
         else if (id == "system")
             NavFrame.Navigate(typeof(SystemPage));
+        else if (id == "display")
+            NavFrame.Navigate(typeof(DisplayPage));
         else if (id == "crosshair")
             NavFrame.Navigate(typeof(CrosshairPage));
         else if (id == "trainer")

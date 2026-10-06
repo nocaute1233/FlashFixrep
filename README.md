@@ -50,6 +50,28 @@ dotnet run --project src/FlashFix.Desktop/FlashFix.Desktop.csproj
 dotnet run --project src/FlashFix.KeyManager/FlashFix.KeyManager.csproj
 ```
 
+### API e conta administrativa local
+
+Para usar o Gerenciador de Chaves **neste PC**, compile a API e execute
+`powershell -NoProfile -File scripts/StartLocalApi.ps1 -InitializeAdmin` uma
+única vez. O script cria uma conta administrativa com senha aleatória, confirma
+o primeiro login e mostra a senha uma vez. A chave interna da API fica protegida
+por DPAPI em `%LOCALAPPDATA%\FlashFix\dev\api-secret.dpapi`; ela não deve ser
+apagada enquanto houver licenças no banco local. Nas próximas sessões, use
+`powershell -NoProfile -File scripts/StartLocalApi.ps1` para iniciar a API.
+No Gerenciador de Chaves, informe `http://127.0.0.1:5031` como endereço.
+Essa instalação local de desenvolvimento não substitui um servidor HTTPS.
+
+### EXE principal
+
+Execute `powershell -NoProfile -File scripts/PublishDesktop.ps1` para gerar o
+aplicativo principal em `dist/FlashFix.Desktop/win-x64`. Abra
+`FlashFix.Desktop.exe` dentro dessa pasta e mantenha os arquivos que o acompanham:
+o WinUI precisa dos recursos `.xbf`, `.pri` e das bibliotecas publicadas. O
+Gerenciador de Chaves fica em `dist/FlashFix-KeyManager-win-x64.exe`.
+Esses binários de desenvolvimento ainda não têm assinatura digital. Para suporte,
+use [discord.gg/flashfix](https://discord.gg/flashfix).
+
 O cliente só aceita HTTP em loopback. Para usar outro servidor, defina
 `FLASHFIX_API_URL` com um endereço HTTPS. Fora de Development, a API exige
 `FLASHFIX_POSTGRES_CONNECTION` e aplica as migrações EF Core na inicialização.

@@ -23,8 +23,8 @@ public sealed partial class AuthPage : Page
         KeyField.Visibility = _register ? Visibility.Visible : Visibility.Collapsed;
         FormTitle.Text = _register ? "Crie sua conta" : "Acesse sua conta";
         FormSubtitle.Text = _register
-            ? "Escolha um nome de usuário, uma senha e informe sua chave."
-            : "Informe seu nome de usuário e senha.";
+            ? "Escolha suas credenciais e informe a chave recebida na compra."
+            : "Use as credenciais da conta vinculada à sua licença.";
         SubmitButton.Content = _register ? "Criar conta" : "Entrar";
         ModeButton.Content = _register ? "Já tem conta? Entrar" : "Criar conta com uma chave";
         ErrorText.Visibility = Visibility.Collapsed;
@@ -79,4 +79,7 @@ public sealed partial class AuthPage : Page
         ErrorText.Text = message;
         ErrorText.Visibility = Visibility.Visible;
     }
+
+    private async void Support_Click(object sender, RoutedEventArgs e) =>
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("https://discord.gg/flashfix"));
 }

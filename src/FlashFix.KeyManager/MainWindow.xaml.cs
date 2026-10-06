@@ -20,6 +20,10 @@ public partial class MainWindow : Window
         Loaded += (_, _) => Animate(LoginView);
     }
 
+    private void Support_Click(object sender, RoutedEventArgs e) =>
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://discord.gg/flashfix")
+        { UseShellExecute = true });
+
     private async void Login_Click(object sender, RoutedEventArgs e)
     {
         LoginError.Text = "";

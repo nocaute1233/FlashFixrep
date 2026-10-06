@@ -1,6 +1,10 @@
 namespace FlashFix.Optimization;
 
-public enum TweakKind { MouseAcceleration, MouseSpeed, KeyboardDelay, KeyboardSpeed }
+public enum TweakKind
+{
+    MouseAcceleration, MouseSpeed, MouseWheelLines, MouseWheelChars,
+    KeyboardDelay, KeyboardSpeed
+}
 
 public sealed record TweakDefinition(
     string Id, string Category, string Name, string Description,
@@ -20,6 +24,16 @@ public static class TweakCatalog
             "Define a velocidade do ponteiro do Windows como 10/20. A sensibilidade dentro dos jogos não é alterada.",
             "Referência neutra e reversível para o cursor.", "Baixo",
             TweakKind.MouseSpeed, [10],
+            "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-systemparametersinfow"),
+        new("mouse.wheel-lines", "mouse", "Rolagem vertical de três linhas",
+            "Define quantas linhas a roda vertical sugere rolar por etapa. Alguns aplicativos usam seus próprios valores.",
+            "Controle mais previsível na navegação; não altera o desempenho do mouse.", "Baixo",
+            TweakKind.MouseWheelLines, [3],
+            "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-systemparametersinfow"),
+        new("mouse.wheel-chars", "mouse", "Rolagem horizontal de três caracteres",
+            "Define a sugestão de rolagem horizontal por etapa para mouses que têm essa roda. Aplicativos podem ignorar o valor.",
+            "Referência consistente para a rolagem horizontal.", "Baixo",
+            TweakKind.MouseWheelChars, [3],
             "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-systemparametersinfow"),
         new("keyboard.delay", "keyboard", "Menor atraso de repetição",
             "Reduz o tempo antes de uma tecla mantida começar a repetir. Não acelera o primeiro pressionamento.",

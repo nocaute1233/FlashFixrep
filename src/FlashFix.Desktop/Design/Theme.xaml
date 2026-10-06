@@ -2,17 +2,18 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="CanvasBrush" Color="#0B0B0C" />
-    <SolidColorBrush x:Key="SurfaceBrush" Color="#151516" />
-    <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="#1D1D1F" />
-    <SolidColorBrush x:Key="LineBrush" Color="#343436" />
-    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F5F5F4" />
-    <SolidColorBrush x:Key="MutedTextBrush" Color="#A1A1A4" />
-    <SolidColorBrush x:Key="SubtleTextBrush" Color="#737377" />
-    <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="#F0F0EE" />
-    <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="#D7D7D5" />
-    <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="#B8B8B6" />
-    <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#F0F0EE" />
+    <SolidColorBrush x:Key="CanvasBrush" Color="#10100F" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#1A1918" />
+    <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="#252320" />
+    <SolidColorBrush x:Key="LineBrush" Color="#3B3833" />
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F7F2EA" />
+    <SolidColorBrush x:Key="MutedTextBrush" Color="#B5ADA3" />
+    <SolidColorBrush x:Key="SubtleTextBrush" Color="#8D857B" />
+    <SolidColorBrush x:Key="BrandBrush" Color="#E6BC86" />
+    <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="#E6BC86" />
+    <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="#D3A975" />
+    <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="#B88F5C" />
+    <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#E6BC86" />
 
     <Style x:Key="EyebrowTextStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11" />
@@ -39,7 +40,7 @@
         <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource LineBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="CornerRadius" Value="18" />
         <Setter Property="Padding" Value="20" />
     </Style>
 </ResourceDictionary>

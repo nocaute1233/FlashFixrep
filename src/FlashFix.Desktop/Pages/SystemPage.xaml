@@ -22,6 +22,23 @@
    <TextBlock x:Name="StatusText" Text="Selecione Analisar sistema para começar." Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
    <TextBlock x:Name="SummaryText" Foreground="White" FontSize="18" FontWeight="SemiBold" TextWrapping="Wrap"/>
    <StackPanel x:Name="AnalysisList" Spacing="9"/>
+   <Border Style="{StaticResource PanelStyle}" Padding="24">
+    <StackPanel Spacing="12">
+     <TextBlock Text="REVISAR NO WINDOWS" Style="{StaticResource EyebrowTextStyle}"/>
+     <TextBlock Text="Decisões que ficam com você" Foreground="{StaticResource PrimaryTextBrush}"
+                FontSize="21" FontWeight="SemiBold"/>
+     <TextBlock Text="Confira espaço, aplicativos de inicialização e atualizações nas próprias configurações do Windows. O FlashFix não modifica essas opções automaticamente."
+                Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"/>
+     <StackPanel Orientation="Horizontal" Spacing="9">
+      <Button Content="Armazenamento" Click="OpenStorage_Click" Background="{StaticResource SurfaceRaisedBrush}"
+              Foreground="{StaticResource PrimaryTextBrush}" BorderThickness="0" CornerRadius="10" Padding="15,9"/>
+      <Button Content="Inicialização" Click="OpenStartup_Click" Background="{StaticResource SurfaceRaisedBrush}"
+              Foreground="{StaticResource PrimaryTextBrush}" BorderThickness="0" CornerRadius="10" Padding="15,9"/>
+      <Button Content="Windows Update" Click="OpenUpdate_Click" Background="{StaticResource SurfaceRaisedBrush}"
+              Foreground="{StaticResource PrimaryTextBrush}" BorderThickness="0" CornerRadius="10" Padding="15,9"/>
+     </StackPanel>
+    </StackPanel>
+   </Border>
   </StackPanel>
  </ScrollViewer>
 </Page>

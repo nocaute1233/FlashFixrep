@@ -72,6 +72,20 @@ public sealed class EngineTests
         Assert.Equal([20], device.Read(TweakKind.KeyboardSpeed));
     }
 
+    [Fact]
+    public async Task Wheel_setting_restores_the_original_page_scroll_mode()
+    {
+        using var files = new TestFiles();
+        var device = new FakeInputSettings();
+        device.Write(TweakKind.MouseWheelLines, [-1]);
+        var engine = new OptimizationEngine(device, files.Root);
+
+        Assert.True((await engine.ApplyAsync("mouse.wheel-lines")).Success);
+        Assert.Equal([3], device.Read(TweakKind.MouseWheelLines));
+        Assert.True((await engine.RestoreAsync("mouse.wheel-lines")).Success);
+        Assert.Equal([-1], device.Read(TweakKind.MouseWheelLines));
+    }
+
     private sealed class FakeInputSettings : IInputSettings
     {
         private readonly Dictionary<TweakKind, int[]> _values = new();

@@ -44,6 +44,15 @@ public sealed partial class SystemPage : Page
         }
     }
 
+    private async void OpenStorage_Click(object sender, RoutedEventArgs e) =>
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:storagesense"));
+
+    private async void OpenStartup_Click(object sender, RoutedEventArgs e) =>
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:startupapps"));
+
+    private async void OpenUpdate_Click(object sender, RoutedEventArgs e) =>
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:windowsupdate"));
+
     private static Border MakeItem(AnalysisItem item)
     {
         var body = new StackPanel { Spacing = 7 };

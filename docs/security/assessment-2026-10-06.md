@@ -90,3 +90,25 @@ Depois, reiniciar o Docker Desktop e verificar `docker info`. Se ainda houver
 falha, consultar o log `Microsoft-Windows-Hyper-V-Compute-Admin` como
 administrador antes de reinstalar WSL ou redefinir o Docker. Nenhum disco do
 Docker foi apagado ou redefinido.
+
+## Atualização da publicação local
+
+O Gerenciador de Chaves recebeu uma conta administrativa no banco SQLite de
+desenvolvimento deste PC. O segredo de HMAC da API é armazenado com proteção
+DPAPI do usuário Windows fora do repositório. A senha aleatória foi exibida ao
+proprietário uma vez e não aparece no código-fonte nem neste relatório. A API
+reiniciou usando o mesmo segredo; `/health` respondeu `ok` e a conta continuou
+no banco.
+
+O executável WinUI principal foi publicado com as bibliotecas e os recursos
+`.xbf`/`.pri`. A primeira publicação não incluiu esses recursos e falhou ao
+iniciar; o alvo `CopyUnpackagedWinUiResources` corrige a saída, e uma segunda
+execução do EXE permaneceu ativa sem novo registro de erro de inicialização.
+O EXE principal e o Gerenciador de Chaves ainda estão **sem assinatura digital**.
+O levantamento NuGet não identificou pacotes com avisos conhecidos nas fontes
+configuradas; isso não equivale a uma auditoria completa.
+
+Permanece a prioridade alta já descrita: uma senha administrativa válida pode
+ser usada de outro dispositivo. Não distribuir a conta de desenvolvimento nem
+tratar o Gerenciador de Chaves como pronto para produção antes de adicionar um
+segundo fator ou vínculo criptográfico administrativo no servidor.
