@@ -7,6 +7,7 @@ public sealed class UserAccount
     public required string NormalizedUsername { get; set; }
     public required string PasswordHash { get; set; }
     public bool IsAdmin { get; set; }
+    public string? AdminDeviceHash { get; set; }
     public bool IsBlocked { get; set; }
     public int FailedLogins { get; set; }
     public DateTime? LockedUntil { get; set; }

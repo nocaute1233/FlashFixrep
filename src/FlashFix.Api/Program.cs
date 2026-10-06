@@ -31,7 +31,7 @@ builder.Services.AddRateLimiter(options =>
         http.Connection.RemoteIpAddress?.ToString() ?? "unknown",
         _ => new FixedWindowRateLimiterOptions
         {
-            PermitLimit = 20,
+            PermitLimit = builder.Environment.IsDevelopment() ? 100 : 20,
             Window = TimeSpan.FromMinutes(1),
             QueueLimit = 0
         }));
@@ -68,7 +68,24 @@ await using (var scope = app.Services.CreateAsyncScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<FlashFixDb>();
     if (app.Environment.IsDevelopment())
+    {
         await db.Database.EnsureCreatedAsync();
+        await db.Database.OpenConnectionAsync();
+        try
+        {
+            await using var command = db.Database.GetDbConnection().CreateCommand();
+            command.CommandText = "PRAGMA table_info(\"Users\")";
+            var exists = false;
+            await using (var columns = await command.ExecuteReaderAsync())
+            {
+                while (await columns.ReadAsync())
+                    exists |= string.Equals(columns.GetString(1), "AdminDeviceHash", StringComparison.Ordinal);
+            }
+            if (!exists)
+                await db.Database.ExecuteSqlRawAsync("ALTER TABLE \"Users\" ADD COLUMN \"AdminDeviceHash\" TEXT");
+        }
+        finally { await db.Database.CloseConnectionAsync(); }
+    }
     else
         await db.Database.MigrateAsync();
 

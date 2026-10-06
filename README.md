@@ -55,7 +55,8 @@ dotnet run --project src/FlashFix.KeyManager/FlashFix.KeyManager.csproj
 Para usar o Gerenciador de Chaves **neste PC**, compile a API e execute
 `powershell -NoProfile -File scripts/StartLocalApi.ps1 -InitializeAdmin` uma
 única vez. O script cria uma conta administrativa com senha aleatória, confirma
-o primeiro login e mostra a senha uma vez. A chave interna da API fica protegida
+o primeiro login com a chave criptográfica deste Windows e mostra a senha uma
+vez. A chave interna da API fica protegida
 por DPAPI em `%LOCALAPPDATA%\FlashFix\dev\api-secret.dpapi`; ela não deve ser
 apagada enquanto houver licenças no banco local. Nas próximas sessões, use
 `powershell -NoProfile -File scripts/StartLocalApi.ps1` para iniciar a API.
@@ -98,9 +99,10 @@ Contas ativadas antes dessa mudança também precisam dessa redefinição antes 
 próximo login. A redefinição invalida as sessões anteriores.
 
 O login administrativo do Gerenciador de Chaves usa a conta criada pelas
-variáveis de bootstrap na primeira execução da API. Não há credenciais padrão
-incluídas no EXE. O login do aplicativo principal é criado pelo usuário ao
-ativar uma chave emitida pelo administrador.
+variáveis de bootstrap na primeira execução da API e uma chave privada local
+não exportável. Não há credenciais padrão incluídas no EXE. O login do
+aplicativo principal é criado pelo usuário ao ativar uma chave emitida pelo
+administrador.
 
 Consulte [Fase 2](docs/architecture/phase-2.md),
 [Fase 3](docs/architecture/phase-3.md) e

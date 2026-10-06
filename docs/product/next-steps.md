@@ -2,8 +2,9 @@
 
 ## Antes de distribuir
 
-1. Vincular a conta administrativa a um segundo fator e oferecer recuperação
-   auditada. Hoje a senha administrativa ainda permite login de outro PC.
+1. Adicionar um segundo fator independente à chave do dispositivo e oferecer
+   recuperação administrativa auditada. A primeira vinculação ainda depende
+   da senha de bootstrap.
 2. Hospedar a API com HTTPS, banco protegido, backup testado e monitoramento de
    falhas de autenticação. A API local serve apenas para desenvolvimento.
 3. Assinar os executáveis e testar instalação, atualização e reversão em um PC

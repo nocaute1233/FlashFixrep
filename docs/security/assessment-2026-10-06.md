@@ -17,16 +17,16 @@ importação da distribuição interna `docker-desktop` falha com
 e do Docker não resolveu. Portanto, esta
 avaliação não é um relatório Strix nem uma comprovação de ausência de falhas.
 
-## Achado reproduzido
+## Achado reproduzido e corrigido
 
-**Prioridade alta — login administrativo sem prova do dispositivo.** Uma conta
-administrativa de teste entrou com a senha correta e um identificador de
-instalação novo. A API emitiu outra sessão administrativa. O identificador é
-um valor fornecido pelo cliente, de modo que a proteção criptográfica aplicada
-às licenças comuns não protege o Gerenciador de Chaves. A reprodução está em
-`tests/DeviceBindingSmoke.ps1`. Recomenda-se exigir segundo fator ou uma chave
-criptográfica previamente autorizada para o administrador, inclusive na
-renovação da sessão.
+O teste inicial mostrou que uma senha administrativa válida permitia entrar de
+outro dispositivo. A API agora exige um desafio assinado também para
+administradores. O primeiro login bem-sucedido vincula a conta à chave pública
+do dispositivo; os acessos e as renovações seguintes exigem a mesma chave.
+`tests/DeviceBindingSmoke.ps1` passou a exigir rejeição de outra chave e de
+login administrativo sem prova. O primeiro vínculo ainda depende de proteger
+a senha de bootstrap até que a conta seja ativada; não substitui um segundo
+fator independente.
 
 ## Verificações que passaram
 
@@ -108,7 +108,8 @@ O EXE principal e o Gerenciador de Chaves ainda estão **sem assinatura digital*
 O levantamento NuGet não identificou pacotes com avisos conhecidos nas fontes
 configuradas; isso não equivale a uma auditoria completa.
 
-Permanece a prioridade alta já descrita: uma senha administrativa válida pode
-ser usada de outro dispositivo. Não distribuir a conta de desenvolvimento nem
-tratar o Gerenciador de Chaves como pronto para produção antes de adicionar um
-segundo fator ou vínculo criptográfico administrativo no servidor.
+A conta administrativa local foi vinculada à chave `FlashFix.Admin.v1` deste
+perfil Windows. O teste de integração confirmou que uma chave diferente e uma
+tentativa sem prova do dispositivo são rejeitadas, inclusive na renovação.
+Ainda faltam um segundo fator independente, recuperação administrativa auditada
+e testes em uma instalação limpa antes da distribuição comercial.

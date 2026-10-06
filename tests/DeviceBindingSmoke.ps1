@@ -58,14 +58,32 @@ try {
     if (-not $ready) { throw "API did not start: $($server.StandardError.ReadToEnd())" }
 
     $deviceId = [Guid]::NewGuid().ToString('N')
-    $admin = Post '/v1/auth/login' @{ username = 'testadmin'; password = $adminPassword; deviceId = $deviceId } $null
+    $adminKey = [Security.Cryptography.RSA]::Create(2048)
+    $otherAdminKey = [Security.Cryptography.RSA]::Create(2048)
+    $adminProof = Proof 'testadmin' 'login' $adminKey
+    $admin = Post '/v1/auth/login' (@{
+        username = 'testadmin'; password = $adminPassword; deviceId = $deviceId
+    } + $adminProof) $null
     AssertStatus $admin 200
-    $adminToken = ($admin.Content | ConvertFrom-Json).accessToken
-    $otherAdmin = Post '/v1/auth/login' @{
+    $adminTokens = $admin.Content | ConvertFrom-Json
+    $adminToken = $adminTokens.accessToken
+    $otherAdminProof = Proof 'testadmin' 'login' $otherAdminKey
+    $otherAdmin = Post '/v1/auth/login' (@{
         username = 'testadmin'; password = $adminPassword
         deviceId = [Guid]::NewGuid().ToString('N')
+    } + $otherAdminProof) $null
+    AssertStatus $otherAdmin 403
+    $adminNoProof = Post '/v1/auth/login' @{
+        username = 'testadmin'; password = $adminPassword; deviceId = $deviceId
     } $null
-    AssertStatus $otherAdmin 200
+    AssertStatus $adminNoProof 403
+    $adminRefreshProof = Proof 'testadmin' 'refresh' $adminKey
+    $adminRefresh = Post '/v1/auth/refresh' (@{
+        refreshToken = $adminTokens.refreshToken; deviceId = $deviceId
+    } + $adminRefreshProof) $null
+    AssertStatus $adminRefresh 200
+    $adminTokens = $adminRefresh.Content | ConvertFrom-Json
+    $adminToken = $adminTokens.accessToken
     $created = Post '/v1/admin/keys' @{ durationDays = 30 } $adminToken
     AssertStatus $created 201
     $createdKey = $created.Content | ConvertFrom-Json
@@ -134,8 +152,7 @@ try {
         username = 'alice'; password = $password; deviceId = $deviceId
     } + $replacementProof) $null
     AssertStatus $replacement 200
-    'PASS: registration, admin isolation, malformed proof, bound login, other device rejection, replay rejection, signed refresh, verified reset'
-    'FINDING: admin credentials work with a new device identifier; administrative login has no device proof.'
+    'PASS: admin device binding, admin proof on refresh, registration, role isolation, malformed proof, bound login, other device rejection, replay rejection, signed refresh, verified reset'
 }
 finally {
     if (-not $server.HasExited) { $server.Kill(); $server.WaitForExit() }

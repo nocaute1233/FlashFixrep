@@ -18,6 +18,7 @@ public sealed class FlashFixDb(DbContextOptions<FlashFixDb> options) : DbContext
             entity.Property(x => x.Username).HasMaxLength(32);
             entity.Property(x => x.NormalizedUsername).HasMaxLength(32);
             entity.Property(x => x.PasswordHash).HasMaxLength(255);
+            entity.Property(x => x.AdminDeviceHash).HasMaxLength(64);
         });
 
         model.Entity<LicenseKey>(entity =>

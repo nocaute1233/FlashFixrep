@@ -25,7 +25,8 @@ public static class SessionAuth
             return null;
 
         if (session.User.IsAdmin)
-            return new AuthContext(session.User, session, null);
+            return session.User.AdminDeviceHash == session.DeviceHash
+                ? new AuthContext(session.User, session, null) : null;
 
         var license = await db.LicenseKeys.FirstOrDefaultAsync(x => x.AssignedUserId == session.UserId);
         if (license is null || !IsValid(license, session.DeviceHash, now))

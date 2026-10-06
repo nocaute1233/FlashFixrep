@@ -31,7 +31,8 @@ public partial class MainWindow : Window
         try
         {
             _api?.Dispose();
-            _api = new FlashFixApiClient(ServerUrl.Text.Trim());
+            _api = new FlashFixApiClient(ServerUrl.Text.Trim(),
+                deviceProof: new WindowsDeviceProof("FlashFix.Admin.v1"));
             await Api.LoginAsync(LoginUsername.Text.Trim(), LoginPassword.Password);
             var profile = await Api.GetProfileAsync();
             if (!profile.IsAdmin)

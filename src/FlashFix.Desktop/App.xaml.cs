@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using FlashFix.Client;
 using System.Globalization;
-using FlashFix_Desktop.Security;
 
 
 namespace FlashFix_Desktop;
@@ -14,7 +13,7 @@ namespace FlashFix_Desktop;
 public partial class App : Application
 {
     private Window? _window;
-    public FlashFixApiClient ApiClient { get; } = new(deviceProof: new WindowsDeviceProof());
+    public FlashFixApiClient ApiClient { get; } = new(deviceProof: new WindowsDeviceProof("FlashFix.License.v1"));
     public event EventHandler? SessionEnded;
 
     public async Task LogoutAsync()

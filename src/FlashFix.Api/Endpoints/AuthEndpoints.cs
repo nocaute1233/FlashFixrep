@@ -135,7 +135,28 @@ public static class AuthEndpoints
 
         var deviceHash = codec.HashDevice(request.DeviceId);
         LicenseKey? license = null;
-        if (!user.IsAdmin)
+        if (user.IsAdmin)
+        {
+            if (!challenges.Consume(request.ChallengeId, normalized, "login",
+                    request.DevicePublicKey, request.DeviceSignature, codec, out var provedDeviceHash))
+                return Results.Json(new { error = "Confirmação do dispositivo inválida." }, statusCode: 403);
+            deviceHash = provedDeviceHash;
+            if (user.AdminDeviceHash is null)
+            {
+                var claimed = await db.Users.Where(x => x.Id == user.Id && x.AdminDeviceHash == null)
+                    .ExecuteUpdateAsync(update => update.SetProperty(x => x.AdminDeviceHash, provedDeviceHash));
+                if (claimed == 0)
+                {
+                    await db.Entry(user).ReloadAsync();
+                    if (user.AdminDeviceHash != provedDeviceHash)
+                        return Results.Json(new { error = "Conta administrativa vinculada a outro dispositivo." }, statusCode: 403);
+                }
+                else user.AdminDeviceHash = provedDeviceHash;
+            }
+            else if (user.AdminDeviceHash != provedDeviceHash)
+                return Results.Json(new { error = "Conta administrativa vinculada a outro dispositivo." }, statusCode: 403);
+        }
+        else
         {
             if (!challenges.Consume(request.ChallengeId, normalized, "login",
                     request.DevicePublicKey, request.DeviceSignature, codec, out var provedDeviceHash))
@@ -184,7 +205,10 @@ public static class AuthEndpoints
 
         if (session.User.IsAdmin)
         {
-            if (session.DeviceHash != codec.HashDevice(request.DeviceId)) return Results.Unauthorized();
+            if (!challenges.Consume(request.ChallengeId, session.User.NormalizedUsername, "refresh",
+                    request.DevicePublicKey, request.DeviceSignature, codec, out var provedDeviceHash) ||
+                session.User.AdminDeviceHash != provedDeviceHash || session.DeviceHash != provedDeviceHash)
+                return Results.Unauthorized();
         }
         else if (!challenges.Consume(request.ChallengeId, session.User.NormalizedUsername, "refresh",
                      request.DevicePublicKey, request.DeviceSignature, codec, out var provedDeviceHash) ||
